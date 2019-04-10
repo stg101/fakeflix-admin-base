@@ -1,24 +1,47 @@
-# README
+# Fakeflix Admin
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the base project of Fakeflix Admin.
 
-Things you may want to cover:
+## Steps to run the app
 
-* Ruby version
+```bash
+bundle install
+rails db:setup
+```
 
-* System dependencies
+## Steps to recreate the app:
 
-* Configuration
+**Generate new project**
+```bash
+$ rails new fakeflix-admin --database=postgresql --skip-test
+```
 
-* Database creation
+**Generate the model Movie**
+```bash
+$ rails g model Movie title:string description:text rating:integer duration:integer price:integer status:string progress:integer
+```
 
-* Database initialization
+**Generate the model Serie**
+```bash
+$ rails g model Serie title:string description:text rating:integer price:integer status:string
+```
 
-* How to run the test suite
+**Generate the model Episode**
+```bash
+$ rails g model Episode title:string description:text duration:integer serie:references progress:integer
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+**Generate the model Rental**
+```bash
+$ rails g model Rental paid_price:integer rentable:references{polymorphic}:index
+```
 
-* Deployment instructions
+**Create the database**
+```bash
+$ rake db:create
+```
 
-* ...
+**Run the migrations**
+```bash
+$ rake db:migrate
+```
