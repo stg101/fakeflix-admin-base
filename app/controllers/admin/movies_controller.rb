@@ -15,8 +15,8 @@ module Admin
     end
 
     def destroy
-      movie = Movie.find(params[:id])
-      movie.destroy
+      @movie = Movie.find(params[:id])
+      @movie.destroy
       redirect_to admin_movies_path, notice: "The movie was successfully deleted"
     end
 
@@ -27,7 +27,7 @@ module Admin
     def create
       @movie = Movie.new(movie_params)
       @movie.save
-      redirect_to admin_movie_path(@movie), notice: "The artist was successfully created"
+      redirect_to admin_movie_path(@movie), notice: "The movie was successfully created"
     end
 
     def update
