@@ -5,6 +5,10 @@ module Admin
       @series = Serie.all
     end
 
+    def show
+      @serie = Serie.find(params[:id])
+    end
+
     def update
       serie = Serie.find(params[:id])
       serie.update(user_params)
