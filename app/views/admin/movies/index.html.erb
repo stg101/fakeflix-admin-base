@@ -1,9 +1,20 @@
 <h1>List of movies</h1>
-
+<%= link_to "Create", new_admin_movie_path(@artist) %>
 <ul>
   <% @movies.each do |movie| %>
-    <li>
-      <%= movie.title %>
+    <li>      
+      <%= link_to(movie.title, admin_movie_url(movie.id)) %>
+      <%= link_to "Edit", edit_admin_movie_path(movie) %>
+      <%= link_to "Delete", admin_movie_path(movie), method: :delete, data: { confirm: "Really delete the movie?" } %>
+      <p><%= movie.description %></p>
+      <p><%= movie.rating %></p>
+      <p><%= movie.duration %></p>
+      <p><%= movie.price %></p>
+      <p><%= movie.status %></p>
+      <p><%= movie.progress %></p>
     </li>
+    </br>
+    </br>
   <% end %>
 </ul>
+
