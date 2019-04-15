@@ -1,5 +1,7 @@
 module Admin
   class SeriesController < ApplicationController
+    before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update]
+
     def index
       @series = Serie.all
     end

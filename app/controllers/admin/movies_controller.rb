@@ -1,5 +1,7 @@
 module Admin
-  class MoviesController < ApplicationController
+  class MoviesController < ApplicationController    
+    before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update]
+
     def index
       @movies = Movie.all
     end
@@ -33,6 +35,8 @@ module Admin
       movie.update(movie_params)
       render json: movie.attributes.to_json, status: :ok
     end  
+    
+    private
 
     def movie_params
       params.require(:movie).permit(

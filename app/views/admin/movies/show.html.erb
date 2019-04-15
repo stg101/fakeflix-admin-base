@@ -6,7 +6,6 @@
 <p><%= @movie.status %></p>
 <p><%= @movie.progress %></p>
 
-<%= link_to "Delete", admin_movie_path(@movie), method: :delete, data: { confirm: "Really delete the movie?" } %>
+<%= link_to "Delete", admin_movie_path(@movie), method: :delete, data: { confirm: "Really delete the movie?" }%>
 <%= link_to "Movies List", admin_movies_path %>
 <%= link_to "Edit", edit_admin_movie_path(@movie) %>
-<%= link_to "Movies List", admin_movies_path %>

@@ -1,5 +1,7 @@
 module Admin
   class RentalsController < ApplicationController
+    before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update]
+
     def index
       @rentals = Rental.all
     end
