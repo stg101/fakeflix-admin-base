@@ -1,0 +1,18 @@
+<h1><%= @serie.title %></h1>
+<p><%= @serie.description %></p>
+<p><%= @serie.rating %></p>
+<p><%= @serie.price %></p>
+<p><%= @serie.status %></p>
+
+<%= link_to "Series List", admin_series_path %>
+
+<% if user_signed_in?  %>
+  <%= link_to "Delete", admin_series_path(@serie), method: :delete, data: { confirm: "Really delete the serie?" }%>
+<% end %>
+
+<% if user_signed_in?  %>
+  <%= link_to "Edit", edit_admin_series_path(@serie)%>
+<% end %>
+
+
+

@@ -1,0 +1,9 @@
+<h1>List of rentals</h1>
+
+<ul>
+  <% @rentals.each do |rental| %>
+    <li>
+      <%= (rental.rentable) ? rental.rentable.title : "null"%>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,30 @@
+<h1>List of series</h1>
+<% if user_signed_in?  %>
+  <%= link_to "Create", new_admin_series_path(@artist) %>
+<% end %>
+
+<ul>
+  <% @series.each do |serie| %>
+    <li>      
+    
+      <%= link_to(serie.title, admin_series_url(serie.id)) %>
+
+      <% if user_signed_in?  %>
+        <%= link_to "Edit", edit_admin_series_path(serie) %>
+      <% end %>
+
+      <% if user_signed_in?  %>
+        <%= link_to "Delete", admin_series_path(serie), method: :delete, data: { confirm: "Really delete the serie?" } %>
+      <% end %>      
+      
+      <p><%= serie.description %></p>
+      <p><%= serie.rating %></p>
+      <p><%= serie.price %></p>
+      <p><%= serie.status %></p>
+
+    </li>
+    </br>
+    </br>
+  <% end %>
+</ul>
+

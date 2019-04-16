@@ -1,15 +1,42 @@
 <!DOCTYPE html>
+
 <html>
+
   <head>
     <title>FakeflixAdmin</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <nav>
+      <div><%= link_to "Home", admin_root_path %></div>
+      <ul>
+        <li><%= link_to "Movies", admin_movies_path %></li>
+        <li><%= link_to "Series", admin_series_index_path %></li>
+        <li><%= link_to "Rentals", admin_rentals_path %></li>
+      </ul>
+
+    </nav>
+    <% if flash[:notice] %>
+      <p class="flash-notice"><%= flash[:notice] %></p>
+    <% end %>
+
+    <div>
+      <% if current_user %>
+        Has iniciado sesión como <strong><%= current_user.email %></strong>!
+        <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Iniciar sesión', new_user_session_path %>
+      <% end %>
+    </div>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
+
+
