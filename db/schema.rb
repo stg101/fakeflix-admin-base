@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_22_205318) do
+ActiveRecord::Schema.define(version: 2019_04_22_214815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,12 @@ ActiveRecord::Schema.define(version: 2019_04_22_205318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rentable_type", "rentable_id"], name: "index_rentals_on_rentable_type_and_rentable_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "series", force: :cascade do |t|
