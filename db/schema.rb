@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_210056) do
+ActiveRecord::Schema.define(version: 2019_04_22_205318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
     t.index ["serie_id"], name: "index_episodes_on_serie_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -36,6 +46,15 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
     t.integer "progress"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.string "uid"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_providers_on_user_id"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -70,4 +89,6 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
   end
 
   add_foreign_key "episodes", "series", column: "serie_id"
+  add_foreign_key "identities", "users"
+  add_foreign_key "providers", "users"
 end
