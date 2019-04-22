@@ -5,6 +5,7 @@ ruby '2.6.1'
 
 gem 'faker'
 gem 'devise'
+gem "pundit"  
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'omniauth-facebook'
 gem 'omniauth-github'

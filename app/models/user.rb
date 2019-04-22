@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  after_create :add_regular_role
   
   has_many :providers 
   has_many :assignments  
@@ -13,6 +15,12 @@ class User < ApplicationRecord
   def role?(role)  
     roles.any? { |r| r.name.underscore.to_sym == role }  
   end 
+
+  def add_regular_role
+    unless roles.any?
+      roles << Role.create(name: "regular")
+    end    
+  end
 
   def self.from_omniauth(auth)
     user = where(email: auth.info.email.downcase).first_or_create do |user|
