@@ -5,6 +5,12 @@ ruby '2.6.1'
 
 gem 'faker'
 gem 'devise'
+gem "pundit"  
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+gem 'omniauth-twitter'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record

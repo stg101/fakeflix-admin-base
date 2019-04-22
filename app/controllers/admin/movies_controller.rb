@@ -1,6 +1,6 @@
 module Admin
-  class MoviesController < ApplicationController    
-    
+  class MoviesController < ApplicationController   
+    before_action :authorize_method
 
     def index
       @movies = Movie.all
@@ -16,6 +16,7 @@ module Admin
 
     def destroy
       @movie = Movie.find(params[:id])
+      authorize @movie
       @movie.destroy
       redirect_to admin_movies_path, notice: "The movie was successfully deleted"
     end
@@ -37,6 +38,10 @@ module Admin
     end  
 
     private
+
+    def authorize_method
+      authorize(Movie)
+    end
 
     def movie_params
       params.require(:movie).permit(

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_210056) do
+ActiveRecord::Schema.define(version: 2019_04_22_214944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_assignments_on_role_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
+  end
 
   create_table "episodes", force: :cascade do |t|
     t.string "title"
@@ -24,6 +33,16 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["serie_id"], name: "index_episodes_on_serie_id"
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -38,6 +57,15 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.string "uid"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_providers_on_user_id"
+  end
+
   create_table "rentals", force: :cascade do |t|
     t.integer "paid_price"
     t.string "rentable_type"
@@ -45,6 +73,12 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["rentable_type", "rentable_id"], name: "index_rentals_on_rentable_type_and_rentable_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "series", force: :cascade do |t|
@@ -69,5 +103,9 @@ ActiveRecord::Schema.define(version: 2019_04_15_210056) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assignments", "roles"
+  add_foreign_key "assignments", "users"
   add_foreign_key "episodes", "series", column: "serie_id"
+  add_foreign_key "identities", "users"
+  add_foreign_key "providers", "users"
 end

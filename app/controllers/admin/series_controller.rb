@@ -1,5 +1,6 @@
 module Admin
   class SeriesController < ApplicationController
+    before_action :authorize_method
 
     def index
       @series = Serie.all
@@ -34,6 +35,11 @@ module Admin
       serie.destroy
       redirect_to admin_series_path, notice: "The serie was successfully deleted"
     end
+
+    def authorize_method
+      authorize(Serie)
+    end
+
 
     def user_params
       params.require(:serie).permit(

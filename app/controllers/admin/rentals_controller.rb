@@ -1,5 +1,6 @@
 module Admin
   class RentalsController < ApplicationController
+    before_action :authorize_method
 
     def index
       @rentals = Rental.all
@@ -9,6 +10,10 @@ module Admin
       rental = Rental.find(params[:id])
       rental.update(user_params)
       render json: rental.attributes.to_json, status: :ok
+    end
+
+    def authorize_method
+      authorize(Rental)
     end
 
     def user_params
